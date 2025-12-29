@@ -1,0 +1,238 @@
+/* src/pages/Tasks.css */
+
+.tasks-page {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* 상단 필터들 */
+.tasks-filter-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+/* 상태 필터 */
+.tasks-filter {
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--gray-100);
+  gap: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.tasks-filter button {
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--gray-500);
+  transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+}
+
+.tasks-filter button.active {
+  background: var(--surface);
+  color: var(--primary);
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
+}
+
+/* 프로젝트 필터 */
+.tasks-project-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--gray-500);
+  flex-wrap: wrap;
+}
+
+.tasks-project-chips {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.tasks-project-chips button {
+  border: none;
+  background: transparent;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--gray-500);
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.tasks-project-chips button.active {
+  background: var(--surface);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+/* 입력 폼 */
+.tasks-form {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr 0.9fr 0.9fr auto;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tasks-input {
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: #fdfdff;
+  font-size: 14px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.tasks-input::placeholder {
+  color: var(--gray-300);
+}
+
+.tasks-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary);
+}
+
+.tasks-date,
+.tasks-priority,
+.tasks-project {
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: #ffffff;
+  font-size: 13px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.tasks-date:focus,
+.tasks-priority:focus,
+.tasks-project:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary);
+}
+
+.tasks-add-btn {
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+}
+
+.tasks-add-btn:hover {
+  background: var(--primary-dark);
+  box-shadow: 0 3px 8px rgba(37, 99, 235, 0.4);
+  transform: translateY(-1px);
+}
+
+/* 카드 섹션 */
+.tasks-section {
+  margin-top: 24px;
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.tasks-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.tasks-section-head h2 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.tasks-section-head span {
+  font-size: 12px;
+  color: var(--gray-500);
+}
+
+.tasks-empty {
+  font-size: 13px;
+  color: var(--gray-500);
+}
+
+/* 리스트 */
+.tasks-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tasks-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 8px 0;
+  border-top: 1px solid var(--border);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.tasks-item:first-child {
+  border-top: none;
+}
+
+.tasks-item:hover {
+  background: rgba(148, 163, 184, 0.06);
+}
+
+.tasks-item-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.tasks-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.tasks-title {
+  font-size: 14px;
+}
+
+.tasks-meta {
+  font-size: 12px;
+  color: var(--gray-500);
+  margin-top: 2px;
+}
+
+.tasks-item-done .tasks-title {
+  text-decoration: line-through;
+  color: var(--gray-500);
+}
+
+.tasks-delete-btn {
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  color: var(--gray-500);
+  cursor: pointer;
+  margin-left: 8px;
+  transition: color 0.15s ease, transform 0.1s ease;
+}
+
+.tasks-delete-btn:hover {
+  color: #ef4444;
+  transform: translateY(-1px);
+}

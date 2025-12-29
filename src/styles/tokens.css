@@ -1,0 +1,154 @@
+/* src/styles/tokens.css */
+
+/* 🐻 기본: 라이트 모드 - 곰돌이 테마 (default) */
+:root {
+  --bg: #fff8ec;
+  --surface: #ffffff;
+
+  --primary: #f4ae7b;
+  --primary-dark: #e18c54;
+
+  --gray-900: #3d2b20;
+  --gray-700: #5b4030;
+  --gray-500: #8a6a55;
+  --gray-300: #d9c3af;
+  --gray-100: #faefe4;
+
+  --border: #edd7c4;
+
+  --radius-md: 14px;
+  --radius-lg: 18px;
+
+  --shadow-soft: 0 10px 25px rgba(111, 78, 55, 0.16);
+
+  --header-blur: rgba(255, 248, 236, 0.8);
+
+  /* 강조색 (요약 카드 등에서 사용) */
+  --accent-soft: #ffe2bf;
+  --accent-strong: #f4ae7b;
+}
+
+/* 🐻 곰돌이 · 다크 모드 */
+:root[data-theme="dark"] {
+  --bg: #1b1410;
+  --surface: #251912;
+
+  --primary: #f4ae7b;
+  --primary-dark: #f09a5c;
+
+  --gray-900: #fef4e8;
+  --gray-700: #f5e1cd;
+  --gray-500: #d3b9a0;
+  --gray-300: #8b6b55;
+  --gray-100: #3a2720;
+
+  --border: #3a2720;
+
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.65);
+
+  --header-blur: rgba(27, 20, 16, 0.85);
+
+  --accent-soft: #3a2720;
+  --accent-strong: #f4ae7b;
+}
+
+/* 🐶 강아지 테마 - 화이트 + 블랙 + 파스텔 블루 */
+:root[data-animal="dog"] {
+  --bg: #f5f7ff;
+  --surface: #ffffff;
+
+  --primary: #4b79f4;
+  --primary-dark: #365bd6;
+
+  --gray-900: #101827;
+  --gray-700: #1f2937;
+  --gray-500: #6b7280;
+  --gray-300: #d1d5db;
+  --gray-100: #e5e7eb;
+
+  --border: #d4d9e6;
+
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  --shadow-soft: 0 10px 25px rgba(15, 23, 42, 0.16);
+
+  --header-blur: rgba(245, 247, 255, 0.9);
+
+  --accent-soft: #dbe4ff;
+  --accent-strong: #4b79f4;
+}
+
+:root[data-theme="dark"][data-animal="dog"] {
+  --bg: #020617;
+  --surface: #020617;
+
+  --primary: #60a5fa;
+  --primary-dark: #3b82f6;
+
+  --gray-900: #e5e7eb;
+  --gray-700: #d1d5db;
+  --gray-500: #9ca3af;
+  --gray-300: #4b5563;
+  --gray-100: #111827;
+
+  --border: #1e293b;
+
+  --shadow-soft: 0 12px 30px rgba(15, 23, 42, 0.9);
+
+  --header-blur: rgba(2, 6, 23, 0.92);
+
+  --accent-soft: #0f172a;
+  --accent-strong: #60a5fa;
+}
+
+/* 🐱 삼색고양이 테마 - 핑크 + 오렌지 + 크림 */
+:root[data-animal="cat"] {
+  --bg: #fff4f7; /* 전체 배경: 연핑크 */
+  --surface: #fffdf9; /* 카드: 크림색 */
+
+  --primary: #ff9f1c; /* 진한 오렌지 */
+  --primary-dark: #ff6b35; /* 더 진한 오렌지 */
+
+  --gray-900: #3b2415; /* 텍스트: 브라운 */
+  --gray-700: #5b3424;
+  --gray-500: #8c5a3c;
+  --gray-300: #f4c9a4;
+  --gray-100: #ffe8cf;
+
+  --border: #f7c4c8; /* 살짝 핑크 도는 보더 */
+
+  --radius-md: 16px;
+  --radius-lg: 22px;
+
+  --shadow-soft: 0 10px 25px rgba(220, 117, 87, 0.25);
+
+  --header-blur: rgba(255, 236, 244, 0.9);
+
+  /* 요약 카드 계열 색 */
+  --accent-soft: #ffd8e5; /* 핑크 하이라이트 */
+  --accent-strong: #ff9f1c; /* 오렌지 그라데이션 시작 */
+}
+
+:root[data-theme="dark"][data-animal="cat"] {
+  --bg: #160b10; /* 어두운 보라+브라운 */
+  --surface: #210f18;
+
+  --primary: #ffb347;
+  --primary-dark: #ff8b3d;
+
+  --gray-900: #ffecef;
+  --gray-700: #ffd5dd;
+  --gray-500: #f2b3c0;
+  --gray-300: #b87478;
+  --gray-100: #3b1b24;
+
+  --border: #4d2633;
+
+  --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.9);
+
+  --header-blur: rgba(20, 8, 14, 0.95);
+
+  --accent-soft: #3b1b24; /* 진한 와인색 */
+  --accent-strong: #ffb347; /* 따뜻한 오렌지 */
+}
