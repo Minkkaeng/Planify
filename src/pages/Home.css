@@ -1,234 +1,181 @@
-/* src/pages/Home.css */
-
-/* 페이지 전체 */
 .home-page {
-  max-width: 640px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+   max-width: 640px;
+   margin: 0 auto;
 }
 
-/* 공통 카드 스타일 */
-.home-hero-card,
-.home-section-card {
-  padding: 16px;
-  border-radius: 18px;
-  background: var(--surface);
-  box-shadow: var(--shadow-soft);
+/* 카드 공통 */
+.home-card {
+   margin-bottom: 16px;
+   padding: 16px;
+   border-radius: 18px;
+   background: var(--surface);
+   box-shadow: var(--shadow-soft);
 }
 
-/* 상단 히어로 */
-.home-hero-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+/* 프로필 */
+.home-profile {
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
 }
 
-.home-hero-logo {
-  width: 44px;
-  height: 44px;
-  border-radius: 18px;
-  object-fit: cover;
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.22);
+.home-profile-left {
+   display: flex;
+   gap: 10px;
+   align-items: center;
 }
 
-.home-hero-eyebrow {
-  margin: 0;
-  font-size: 11px;
-  color: var(--gray-500);
+.home-profile-avatar {
+   width: 40px;
+   height: 40px;
+   border-radius: 999px;
+   background: var(--accent-soft);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-size: 22px;
 }
 
-.home-hero-title {
-  margin: 2px 0 2px;
-  font-size: 18px;
+.home-profile-texts {
+   display: flex;
+   flex-direction: column;
+   gap: 2px;
 }
 
-.home-hero-sub {
-  margin: 0;
-  font-size: 12px;
-  color: var(--gray-500);
+.home-profile-hello {
+   margin: 0;
+   font-size: 14px;
+   font-weight: 600;
+   color: var(--gray-900);
 }
 
-/* 섹션 헤더 */
-.home-section-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 6px;
+.home-profile-bio {
+   margin: 0;
+   font-size: 12px;
+   color: var(--gray-500);
 }
 
-.home-section-eyebrow {
-  margin: 0;
-  font-size: 11px;
-  color: var(--gray-500);
+.home-profile-email {
+   margin: 0;
+   font-size: 12px;
+   color: var(--gray-500);
+   text-align: right;
 }
 
-.home-section-title {
-  margin: 0;
-  font-size: 15px;
+/* 공통 헤더 */
+.home-card-head {
+   display: flex;
+   justify-content: space-between;
+   align-items: baseline;
+   margin-bottom: 10px;
 }
 
-.home-section-title.small {
-  font-size: 14px;
+.home-card-head h2 {
+   margin: 0;
+   font-size: 15px;
 }
 
-.home-link-button {
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  font-size: 11px;
-  padding: 5px 10px;
-  cursor: pointer;
+.home-card-head span {
+   font-size: 12px;
+   color: var(--gray-500);
 }
 
-/* 오늘 요약 pill들 */
-.home-today-summary {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 6px;
+/* 요약 카드 */
+.home-summary {
+   background: radial-gradient(circle at 0 0, var(--accent-soft) 0, transparent 55%), radial-gradient(circle at 100% 0, rgba(255, 255, 255, 0.35) 0, transparent 60%),
+      linear-gradient(135deg, var(--accent-strong), var(--primary-dark));
+   /* 요약 카드 안 기본 텍스트 컬러 */
+   color: var(--summary-value-color);
 }
 
-.home-today-pill {
-  flex: 1;
-  border-radius: 999px;
-  padding: 6px 10px;
-  background: var(--gray-50);
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+.home-summary .home-card-head span {
+   /* 날짜 텍스트 */
+   color: var(--summary-head-sub-color);
 }
 
-.home-today-pill .label {
-  font-size: 10px;
-  color: var(--gray-500);
+.home-summary-grid {
+   display: grid;
+   grid-template-columns: repeat(2, minmax(0, 1fr));
+   gap: 8px;
+   margin-top: 8px;
 }
 
-.home-today-pill .value {
-  font-size: 14px;
-  font-weight: 700;
+.home-summary-item {
+   padding: 10px;
+   border-radius: 14px;
+   background: var(--summary-item-bg);
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
 }
 
-.home-today-pill.done {
-  background: rgba(34, 197, 94, 0.08);
+.home-summary-item .label {
+   margin: 0 0 4px;
+   font-size: 11px;
+   color: var(--summary-label-color);
 }
 
-.home-today-pill.pending {
-  background: rgba(239, 68, 68, 0.06);
+.home-summary-item .value {
+   margin: 0;
+   font-size: 18px;
+   font-weight: 800;
+   color: var(--summary-value-color);
 }
 
-/* 공통 empty */
-.home-empty-text {
-  margin: 4px 0 0;
-  font-size: 12px;
-  color: var(--gray-500);
+/* 리스트 공통 */
+.home-empty {
+   font-size: 13px;
+   color: var(--gray-500);
 }
 
-/* 오늘 할 일 리스트 */
-.home-task-list {
-  list-style: none;
-  margin: 6px 0 0;
-  padding: 0;
+.home-list {
+   list-style: none;
+   margin: 0;
+   padding: 0;
 }
 
-.home-task-item {
-  padding: 4px 0;
+.home-list-item {
+   display: flex;
+   justify-content: space-between;
+   align-items: baseline;
+   padding: 6px 0;
+   border-top: 1px solid var(--border);
 }
 
-.home-task-item .title {
-  font-size: 13px;
+.home-list-item:first-child {
+   border-top: none;
 }
 
-.home-task-item .meta {
-  display: block;
-  font-size: 11px;
-  color: var(--gray-500);
+.home-task-title {
+   font-size: 14px;
 }
 
-.home-task-item.done .title {
-  text-decoration: line-through;
-  color: var(--gray-400);
+.home-task-meta {
+   font-size: 12px;
+   color: var(--gray-500);
 }
 
-/* 다가오는 일정 */
-.home-upcoming-list {
-  list-style: none;
-  margin: 4px 0 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+.home-list-item-done .home-task-title {
+   text-decoration: line-through;
+   color: var(--gray-500);
 }
 
-.home-upcoming-item {
-  display: flex;
-  gap: 8px;
-  padding: 4px 0;
+/* 서브블럭 */
+.home-subblock {
+   margin-top: 10px;
 }
 
-.upcoming-date {
-  min-width: 52px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.upcoming-date .day {
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.upcoming-date .weekday {
-  font-size: 11px;
-  color: var(--gray-500);
-}
-
-.upcoming-main .title {
-  display: block;
-  font-size: 13px;
-}
-
-.upcoming-main .meta {
-  display: block;
-  font-size: 11px;
-  color: var(--gray-500);
-}
-
-/* 빠른 이동 */
-.home-quick-card {
-  margin-bottom: 8px;
-}
-
-.home-quick-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 6px;
-}
-
-.home-quick-chip {
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  padding: 6px 10px;
-  font-size: 12px;
-  cursor: pointer;
+.home-subblock-title {
+   margin: 0 0 4px;
+   font-size: 12px;
+   color: var(--gray-500);
 }
 
 /* 반응형 */
 @media (max-width: 640px) {
-  .home-page {
-    padding-bottom: 4px;
-  }
+   .home-card {
+      padding: 14px;
+   }
 
-  .home-hero-card,
-  .home-section-card {
-    padding: 14px;
-  }
-
-  .home-hero-logo {
-    width: 40px;
-    height: 40px;
-  }
+   .home-profile-email {
+      text-align: left;
+   }
 }

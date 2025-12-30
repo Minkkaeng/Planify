@@ -1,77 +1,51 @@
-// src/context/ThemeContext.jsx
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from 'react';
 
 const ThemeContext = createContext(null);
 
-const COLOR_MODE_KEY = "planify_color_mode";
-const JELLY_KEY = "planify_jelly";
+const COLOR_KEY = 'planify_colorMode'; // light | dark
+const JELLY_KEY = 'planify_jelly'; // yellow | purple | pink
 
 export function ThemeProvider({ children }) {
-  const [colorMode, setColorModeState] = useState("light");
-  const [jelly, setJellyState] = useState("yellow");
+   const [colorMode, setColorMode] = useState('light');
+   const [jelly, setJelly] = useState('yellow');
 
-  useEffect(() => {
-    try {
-      const savedMode = localStorage.getItem(COLOR_MODE_KEY);
+   // 초기 로드
+   useEffect(() => {
+      const savedMode = localStorage.getItem(COLOR_KEY);
       const savedJelly = localStorage.getItem(JELLY_KEY);
 
-      if (savedMode === "light" || savedMode === "dark") {
-        setColorModeState(savedMode);
-      } else {
-        const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
-        setColorModeState(prefersDark ? "dark" : "light");
-      }
+      const initialMode = savedMode === 'dark' || savedMode === 'light' ? savedMode : 'light';
+      const initialJelly = savedJelly === 'purple' || savedJelly === 'pink' ? savedJelly : 'yellow';
 
-      if (savedJelly === "yellow" || savedJelly === "purple" || savedJelly === "pink") {
-        setJellyState(savedJelly);
-      } else {
-        setJellyState("yellow");
-      }
-    } catch {
-      setColorModeState("light");
-      setJellyState("yellow");
-    }
-  }, []);
+      setColorMode(initialMode);
+      setJelly(initialJelly);
 
-  useEffect(() => {
-    document.documentElement.dataset.theme = colorMode;
-    try {
-      localStorage.setItem(COLOR_MODE_KEY, colorMode);
-    } catch {}
-  }, [colorMode]);
+      document.documentElement.dataset.theme = initialMode;
+      document.documentElement.dataset.jelly = initialJelly;
+   }, []);
 
-  useEffect(() => {
-    try {
+   useEffect(() => {
+      document.documentElement.dataset.theme = colorMode;
+      localStorage.setItem(COLOR_KEY, colorMode);
+   }, [colorMode]);
+
+   useEffect(() => {
+      document.documentElement.dataset.jelly = jelly;
       localStorage.setItem(JELLY_KEY, jelly);
-    } catch {}
-  }, [jelly]);
+   }, [jelly]);
 
-  const setColorMode = (mode) => {
-    setColorModeState(mode === "dark" ? "dark" : "light");
-  };
+   const value = {
+      colorMode,
+      setColorMode,
+      jelly,
+      setJelly,
+   };
 
-  const setJelly = (theme) => {
-    if (theme === "purple" || theme === "pink" || theme === "yellow") {
-      setJellyState(theme);
-    } else {
-      setJellyState("yellow");
-    }
-  };
-
-  const value = {
-    colorMode,
-    setColorMode,
-    jelly,
-    setJelly,
-  };
-
-  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
+   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }
 
 export function useTheme() {
-  const ctx = useContext(ThemeContext);
-  if (!ctx) {
-    throw new Error("useTheme must be used within ThemeProvider");
-  }
-  return ctx;
+   const ctx = useContext(ThemeContext);
+   if (!ctx) throw new Error('useTheme must be used within ThemeProvider');
+   return ctx;
 }

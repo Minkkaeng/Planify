@@ -1,96 +1,181 @@
 // src/pages/Home.jsx
-import { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import dayjs from "dayjs";
-import "./Home.css";
+import { useMemo, useState } from 'react';
+import dayjs from 'dayjs';
+import Layout from '../components/Layout';
+import { loadTasks } from '../utils/taskStorage';
+import { loadProfile } from '../utils/profileStorage';
+import './Home.css';
 
-import Layout from "../components/Layout";
-import { useTheme } from "../context/ThemeContext";
-import { getJellyLogo, getJellyLabel } from "../utils/jellyAssets";
-import { loadTasks } from "../utils/taskStorage";
+const PROJECT_LABEL = {
+   personal: '개인',
+   study: '공부',
+   work: '일',
+   etc: '기타',
+};
 
-function loadProfile() {
-  try {
-    const raw = localStorage.getItem("planify_profile");
-    if (!raw) return { nickname: "", intro: "" };
-    const parsed = JSON.parse(raw);
-    return {
-      nickname: parsed.nickname || "",
-      intro: parsed.intro || "",
-    };
-  } catch {
-    return { nickname: "", intro: "" };
-  }
+function sortByDueDate(list) {
+   return [...list].sort((a, b) => {
+      const da = a.dueDate || '';
+      const db = b.dueDate || '';
+
+      if (da && db && da !== db) return da.localeCompare(db);
+      if (da && !db) return -1;
+      if (!da && db) return 1;
+      return (b.createdAt || 0) - (a.createdAt || 0);
+   });
 }
 
 function Home() {
-  const navigate = useNavigate();
-  const { jelly } = useTheme();
+   // ⭕ 초기값에서 바로 localStorage 읽기
+   const [tasks] = useState(() => loadTasks());
+   const [profile] = useState(() => loadProfile());
 
-  const [tasks, setTasks] = useState([]);
+   const todayStr = dayjs().format('YYYY-MM-DD');
 
-  const logo = getJellyLogo(jelly);
-  const jellyLabel = getJellyLabel(jelly);
+   const { todayActive, todayDone, upcoming, noDue, totalActive, totalDone } = useMemo(() => {
+      const active = tasks.filter((t) => !t.done);
+      const done = tasks.filter((t) => t.done);
 
-  const { nickname, intro } = loadProfile();
+      const todayActive = active.filter((t) => t.dueDate === todayStr);
+      const todayDone = done.filter((t) => t.dueDate === todayStr);
 
-  const todayStr = dayjs().format("YYYY-MM-DD");
+      const upcoming = active.filter((t) => t.dueDate && t.dueDate > todayStr);
+      const noDue = active.filter((t) => !t.dueDate);
 
-  useEffect(() => {
-    setTasks(loadTasks());
-  }, []);
+      return {
+         todayActive: sortByDueDate(todayActive),
+         todayDone: sortByDueDate(todayDone),
+         upcoming: sortByDueDate(upcoming),
+         noDue: sortByDueDate(noDue),
+         totalActive: active.length,
+         totalDone: done.length,
+      };
+   }, [tasks, todayStr]);
 
-  const { todayTotal, todayDone, todayPending, todayTasks } = useMemo(() => {
-    const todayList = tasks.filter((t) => t.dueDate === todayStr);
-    const doneCount = todayList.filter((t) => t.done).length;
-    const pendingCount = todayList.length - doneCount;
-    return {
-      todayTotal: todayList.length,
-      todayDone: doneCount,
-      todayPending: pendingCount,
-      todayTasks: todayList
-        .slice()
-        .sort((a, b) => b.id - a.id)
-        .slice(0, 3),
-    };
-  }, [tasks, todayStr]);
+   return (
+      <Layout title="Planify">
+         <div className="home-page">
+            {/* 프로필 */}
+            <section className="home-card home-profile">
+               <div className="home-profile-left">
+                  <div className="home-profile-avatar">✨</div>
+                  <div className="home-profile-texts">
+                     <p className="home-profile-hello">
+                        {profile.nickname ? `${profile.nickname}님, 오늘 젤리 플랜 시작해볼까요?` : '오늘 할 일을 젤리처럼 조각조각 정리해보세요.'}
+                     </p>
+                     <p className="home-profile-bio">{profile.bio ? profile.bio : 'Settings에서 닉네임과 한 줄 소개를 설정할 수 있어요.'}</p>
+                  </div>
+               </div>
+               {profile.email && <p className="home-profile-email">{profile.email}</p>}
+            </section>
 
-  const upcomingTasks = useMemo(() => {
-    const list = tasks
-      .filter((t) => t.dueDate && t.dueDate > todayStr)
-      .sort((a, b) => {
-        if (a.dueDate === b.dueDate) return b.id - a.id;
-        return a.dueDate.localeCompare(b.dueDate);
-      })
-      .slice(0, 5);
-    return list;
-  }, [tasks, todayStr]);
+            {/* 요약 */}
+            <section className="home-card home-summary">
+               <header className="home-card-head">
+                  <h2>오늘 요약</h2>
+                  <span>{dayjs().format('YYYY.MM.DD')}</span>
+               </header>
 
-  const displayName = nickname || "오늘의 플랜";
-  const displayIntro = intro || "세 가지 젤리 테마로 오늘 하루를 말랑하게 정리해보자.";
+               <div className="home-summary-grid">
+                  <div className="home-summary-item">
+                     <p className="label">오늘 해야 할 일</p>
+                     <p className="value">{todayActive.length}</p>
+                  </div>
+                  <div className="home-summary-item">
+                     <p className="label">오늘 완료</p>
+                     <p className="value">{todayDone.length}</p>
+                  </div>
+                  <div className="home-summary-item">
+                     <p className="label">진행 중</p>
+                     <p className="value">{totalActive}</p>
+                  </div>
+                  <div className="home-summary-item">
+                     <p className="label">전체 완료</p>
+                     <p className="value">{totalDone}</p>
+                  </div>
+               </div>
+            </section>
 
-  const goTasks = () => navigate("/tasks");
-  const goCalendar = () => navigate("/calendar");
+            {/* 오늘 할 일 */}
+            <section className="home-card">
+               <header className="home-card-head">
+                  <h2>오늘 할 일</h2>
+               </header>
 
-  return (
-    <Layout title="홈">
-      <div className="home-page">
-        {/* 상단 카드 */}
-        <section className="home-hero-card">
-          <div className="home-hero-left">
-            <img src={logo} alt={`${jellyLabel} 로고`} className="home-hero-logo" />
-            <div>
-              <p className="home-hero-eyebrow">{jellyLabel} 모드</p>
-              <h1 className="home-hero-title">{displayName}</h1>
-              <p className="home-hero-sub">{displayIntro}</p>
-            </div>
-          </div>
-        </section>
+               {todayActive.length === 0 && todayDone.length === 0 ? (
+                  <p className="home-empty">오늘로 지정된 할 일이 없습니다. 플랜 탭에서 새 할 일을 추가해보세요.</p>
+               ) : (
+                  <>
+                     {todayActive.length > 0 && (
+                        <ul className="home-list">
+                           {todayActive.slice(0, 5).map((t) => (
+                              <li key={t.id} className="home-list-item">
+                                 <span className="home-task-title">{t.title}</span>
+                                 <span className="home-task-meta">프로젝트 {PROJECT_LABEL[t.project] || '기타'} · 진행 중</span>
+                              </li>
+                           ))}
+                        </ul>
+                     )}
 
-        {/* 이하 요약/다가오는 일정/빠른 이동 ... (앞에서 준 코드 그대로) */}
-      </div>
-    </Layout>
-  );
+                     {todayDone.length > 0 && (
+                        <div className="home-subblock">
+                           <p className="home-subblock-title">오늘 완료</p>
+                           <ul className="home-list">
+                              {todayDone.slice(0, 5).map((t) => (
+                                 <li key={t.id} className="home-list-item home-list-item-done">
+                                    <span className="home-task-title">{t.title}</span>
+                                    <span className="home-task-meta">프로젝트 {PROJECT_LABEL[t.project] || '기타'} · 완료</span>
+                                 </li>
+                              ))}
+                           </ul>
+                        </div>
+                     )}
+                  </>
+               )}
+            </section>
+
+            {/* 다가오는 일정 */}
+            <section className="home-card">
+               <header className="home-card-head">
+                  <h2>다가오는 일정</h2>
+               </header>
+               {upcoming.length === 0 ? (
+                  <p className="home-empty">앞으로 마감일이 있는 할 일이 없습니다. 마감일을 지정해두면 관리하기 좋아요.</p>
+               ) : (
+                  <ul className="home-list">
+                     {upcoming.slice(0, 5).map((t) => (
+                        <li key={t.id} className="home-list-item">
+                           <span className="home-task-title">{t.title}</span>
+                           <span className="home-task-meta">
+                              {dayjs(t.dueDate).format('MM.DD')} · {t.priority === 'high' ? '우선순위 높음' : t.priority === 'low' ? '우선순위 낮음' : '우선순위 보통'}
+                           </span>
+                        </li>
+                     ))}
+                  </ul>
+               )}
+            </section>
+
+            {/* 마감일 없는 할 일 */}
+            <section className="home-card">
+               <header className="home-card-head">
+                  <h2>마감일 없는 할 일</h2>
+               </header>
+               {noDue.length === 0 ? (
+                  <p className="home-empty">마감일이 없는 할 일이 없습니다. 언젠가 하고 싶은 일들을 여기에 모아둘 수 있어요.</p>
+               ) : (
+                  <ul className="home-list">
+                     {noDue.slice(0, 5).map((t) => (
+                        <li key={t.id} className="home-list-item">
+                           <span className="home-task-title">{t.title}</span>
+                           <span className="home-task-meta">프로젝트 {PROJECT_LABEL[t.project] || '기타'}</span>
+                        </li>
+                     ))}
+                  </ul>
+               )}
+            </section>
+         </div>
+      </Layout>
+   );
 }
 
 export default Home;

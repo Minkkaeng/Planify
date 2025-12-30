@@ -1,238 +1,367 @@
-/* src/pages/Tasks.css */
-
 .tasks-page {
-  max-width: 720px;
-  margin: 0 auto;
+   max-width: 640px;
+   margin: 0 auto;
+   display: flex;
+   flex-direction: column;
+   gap: 16px;
 }
 
-/* 상단 필터들 */
-.tasks-filter-row {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 12px;
+.tasks-card {
+   padding: 16px;
+   border-radius: 18px;
+   background: var(--surface);
+   box-shadow: var(--shadow-soft);
 }
 
-/* 상태 필터 */
-.tasks-filter {
-  display: inline-flex;
-  padding: 4px;
-  border-radius: 999px;
-  background: var(--gray-100);
-  gap: 4px;
-  transition: background-color 0.2s ease;
+.tasks-card-head {
+   display: flex;
+   justify-content: space-between;
+   align-items: baseline;
+   margin-bottom: 10px;
 }
 
-.tasks-filter button {
-  border: none;
-  background: transparent;
-  font-size: 12px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  cursor: pointer;
-  color: var(--gray-500);
-  transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+.tasks-card-head h2 {
+   margin: 0;
+   font-size: 15px;
 }
 
-.tasks-filter button.active {
-  background: var(--surface);
-  color: var(--primary);
-  font-weight: 600;
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
+/* 상단 카테고리 탭 */
+.tasks-filter-tabs {
+   display: inline-flex;
+   gap: 6px;
+   margin-bottom: 8px;
+   padding: 4px;
+   border-radius: 999px;
+   background: rgba(0, 0, 0, 0.02);
 }
 
-/* 프로젝트 필터 */
-.tasks-project-filter {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  color: var(--gray-500);
-  flex-wrap: wrap;
+:root[data-theme='dark'] .tasks-filter-tabs {
+   background: rgba(255, 255, 255, 0.04);
 }
 
-.tasks-project-chips {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 4px;
+.tasks-filter-tabs button {
+   border-radius: 999px;
+   border: 1px solid transparent;
+   background: transparent;
+   font-size: 12px;
+   padding: 4px 10px;
+   cursor: pointer;
+   color: var(--gray-500);
+   transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
 }
 
-.tasks-project-chips button {
-  border: none;
-  background: transparent;
-  font-size: 11px;
-  padding: 4px 8px;
-  border-radius: 999px;
-  cursor: pointer;
-  color: var(--gray-500);
-  border: 1px solid transparent;
-  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+.tasks-filter-tabs button.active {
+   background: var(--primary);
+   color: var(--btn-on-primary);
+   border-color: var(--primary-dark);
+   transform: translateY(-1px);
 }
 
-.tasks-project-chips button.active {
-  background: var(--surface);
-  color: var(--primary);
-  border-color: var(--primary);
-}
-
-/* 입력 폼 */
+/* 폼 */
 .tasks-form {
-  display: grid;
-  grid-template-columns: 1.7fr 1fr 0.9fr 0.9fr auto;
-  gap: 8px;
-  margin-bottom: 16px;
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
 }
 
-.tasks-input {
-  padding: 10px 12px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border);
-  background: #fdfdff;
-  font-size: 14px;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+.tasks-field {
+   display: flex;
+   flex-direction: column;
+   gap: 4px;
 }
 
-.tasks-input::placeholder {
-  color: var(--gray-300);
+.tasks-field label {
+   font-size: 12px;
+   color: var(--gray-500);
 }
 
-.tasks-input:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 1px var(--primary);
+.tasks-field input,
+.tasks-field select,
+.tasks-field textarea {
+   border-radius: 12px;
+   border: 1px solid var(--border);
+   padding: 8px 10px;
+   font-size: 13px;
+   background: #ffffff;
 }
 
-.tasks-date,
-.tasks-priority,
-.tasks-project {
-  padding: 10px 12px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border);
-  background: #ffffff;
-  font-size: 13px;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+:root[data-theme='dark'] .tasks-field input,
+:root[data-theme='dark'] .tasks-field select,
+:root[data-theme='dark'] .tasks-field textarea {
+   background: #111827;
+   color: var(--gray-900);
 }
 
-.tasks-date:focus,
-.tasks-priority:focus,
-.tasks-project:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 1px var(--primary);
+/* 마감일 input 캘린더 아이콘 */
+.tasks-field input[type='date']::-webkit-calendar-picker-indicator {
+   cursor: pointer;
+   opacity: 0.8;
 }
 
-.tasks-add-btn {
-  padding: 10px 16px;
-  border-radius: var(--radius-md);
-  border: none;
-  background: var(--primary);
-  color: #fff;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+:root[data-theme='dark'] .tasks-field input[type='date']::-webkit-calendar-picker-indicator {
+   filter: invert(1) brightness(1.2);
+   opacity: 0.95;
 }
 
-.tasks-add-btn:hover {
-  background: var(--primary-dark);
-  box-shadow: 0 3px 8px rgba(37, 99, 235, 0.4);
-  transform: translateY(-1px);
+.tasks-row {
+   display: grid;
+   grid-template-columns: 1.1fr 1.1fr 1.2fr;
+   gap: 8px;
 }
 
-/* 카드 섹션 */
-.tasks-section {
-  margin-top: 24px;
-  padding: 16px;
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-  box-shadow: var(--shadow-soft);
-  transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+.tasks-actions {
+   display: flex;
+   justify-content: flex-end;
 }
 
-.tasks-section-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
+.tasks-actions button {
+   border: none;
+   border-radius: 12px;
+   padding: 8px 14px;
+   background: var(--primary);
+   color: var(--btn-on-primary);
+   font-size: 13px;
+   font-weight: 600;
+   cursor: pointer;
 }
 
-.tasks-section-head h2 {
-  margin: 0;
-  font-size: 15px;
-}
-
-.tasks-section-head span {
-  font-size: 12px;
-  color: var(--gray-500);
-}
-
+/* 리스트 공통 */
 .tasks-empty {
-  font-size: 13px;
-  color: var(--gray-500);
+   font-size: 13px;
+   color: var(--gray-500);
 }
 
-/* 리스트 */
+.tasks-section {
+   margin-top: 4px;
+}
+
+.tasks-section-title {
+   margin: 0 0 4px;
+   font-size: 12px;
+   color: var(--gray-500);
+}
+
 .tasks-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+   list-style: none;
+   margin: 0;
+   padding: 0;
 }
 
 .tasks-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 8px 0;
-  border-top: 1px solid var(--border);
-  transition: background-color 0.15s ease, border-color 0.15s ease;
+   position: relative;
+   display: flex;
+   gap: 8px;
+   padding: 8px 0;
+   border-top: 1px solid var(--border);
 }
 
 .tasks-item:first-child {
-  border-top: none;
-}
-
-.tasks-item:hover {
-  background: rgba(148, 163, 184, 0.06);
+   border-top: none;
 }
 
 .tasks-item-main {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  cursor: pointer;
+   flex: 1;
 }
 
-.tasks-text {
-  display: flex;
-  flex-direction: column;
+.tasks-checkbox-label {
+   display: inline-flex;
+   align-items: center;
+   gap: 6px;
+}
+
+.tasks-checkbox-label input {
+   width: 14px;
+   height: 14px;
 }
 
 .tasks-title {
-  font-size: 14px;
+   font-size: 14px;
+}
+
+.tasks-title.done {
+   text-decoration: line-through;
+   color: var(--gray-500);
 }
 
 .tasks-meta {
-  font-size: 12px;
-  color: var(--gray-500);
-  margin-top: 2px;
+   margin: 2px 0 0;
+   font-size: 12px;
+   color: var(--gray-500);
 }
 
-.tasks-item-done .tasks-title {
-  text-decoration: line-through;
-  color: var(--gray-500);
+.tasks-memo {
+   margin: 4px 0 0;
+   font-size: 12px;
 }
 
-.tasks-delete-btn {
-  border: none;
-  background: transparent;
-  font-size: 12px;
-  color: var(--gray-500);
-  cursor: pointer;
-  margin-left: 8px;
-  transition: color 0.15s ease, transform 0.1s ease;
+/* 완료 항목: 전체적으로 살짝 흐리게 */
+.tasks-item.done {
+   opacity: 0.6;
 }
 
-.tasks-delete-btn:hover {
-  color: #ef4444;
-  transform: translateY(-1px);
+/* 리스트 우측: 수정 / 완료 나란히 */
+.tasks-actions-inline {
+   display: flex;
+   flex-direction: row;
+   gap: 6px;
+   align-items: center;
+   align-self: center;
+}
+
+/* 수정 버튼 */
+.tasks-edit-btn {
+   border-radius: 999px;
+   border: 1px solid var(--border);
+   background: var(--surface);
+   padding: 4px 10px;
+   font-size: 11px;
+   color: var(--gray-700);
+   cursor: pointer;
+}
+
+:root[data-theme='dark'] .tasks-edit-btn {
+   background: rgba(255, 255, 255, 0.06);
+   border-color: rgba(255, 255, 255, 0.18);
+   color: var(--gray-900);
+}
+
+/* 완료 버튼 */
+.tasks-done-btn {
+   border-radius: 999px;
+   border: 1px solid var(--primary-dark);
+   background: var(--primary);
+   color: var(--btn-on-primary);
+   padding: 4px 10px;
+   font-size: 11px;
+   cursor: pointer;
+}
+
+.tasks-done-badge {
+   font-size: 11px;
+   color: var(--gray-500);
+}
+
+/* 카드 우측 상단 X 버튼 */
+.tasks-close-btn {
+   position: absolute;
+   top: 4px;
+   right: 0;
+   border: none;
+   background: transparent;
+   font-size: 14px;
+   line-height: 1;
+   cursor: pointer;
+   color: var(--gray-500);
+   padding: 2px 4px;
+}
+
+.tasks-close-btn:hover {
+   color: var(--gray-700);
+}
+
+/* 수정/삭제 공용 모달 */
+.tasks-modal-backdrop {
+   position: fixed;
+   inset: 0;
+   background: rgba(15, 23, 42, 0.45);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   z-index: 40;
+}
+
+.tasks-modal {
+   width: 100%;
+   max-width: 420px;
+   border-radius: 18px;
+   background: var(--surface);
+   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+   padding: 14px;
+}
+
+.tasks-modal-head {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   gap: 8px;
+   margin-bottom: 6px;
+}
+
+.tasks-modal-head h3 {
+   margin: 0;
+   font-size: 14px;
+}
+
+.tasks-modal-close {
+   border: none;
+   background: transparent;
+   font-size: 16px;
+   cursor: pointer;
+}
+
+.tasks-modal-message {
+   margin: 4px 0 10px;
+   font-size: 13px;
+}
+
+.tasks-modal-form {
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
+}
+
+/* 모달 안 date 아이콘도 동일 처리 */
+.tasks-modal .tasks-field input[type='date']::-webkit-calendar-picker-indicator {
+   cursor: pointer;
+   opacity: 0.8;
+}
+
+:root[data-theme='dark'] .tasks-modal .tasks-field input[type='date']::-webkit-calendar-picker-indicator {
+   filter: invert(1) brightness(1.2);
+   opacity: 0.95;
+}
+
+.tasks-modal-actions {
+   margin-top: 8px;
+   display: flex;
+   justify-content: flex-end;
+   gap: 6px;
+}
+
+.tasks-modal-cancel,
+.tasks-modal-submit {
+   border-radius: 12px;
+   border: none;
+   padding: 7px 12px;
+   font-size: 12px;
+   cursor: pointer;
+}
+
+.tasks-modal-cancel {
+   background: var(--gray-100);
+   color: var(--gray-700);
+}
+
+.tasks-modal-submit {
+   background: var(--primary);
+   color: var(--btn-on-primary);
+}
+
+/* 반응형 */
+@media (max-width: 640px) {
+   .tasks-card {
+      padding: 14px;
+   }
+
+   .tasks-row {
+      grid-template-columns: 1fr 1fr;
+   }
+
+   .tasks-row .tasks-field:last-child {
+      grid-column: 1 / -1;
+   }
+
+   .tasks-modal {
+      margin: 0 16px;
+   }
 }

@@ -1,154 +1,252 @@
-/* src/styles/tokens.css */
-
-/* 🐻 기본: 라이트 모드 - 곰돌이 테마 (default) */
+/* 기본: light + yellow jelly (기본 테마) */
 :root {
-  --bg: #fff8ec;
-  --surface: #ffffff;
+   --bg: #fffbe8;
+   --surface: #ffffff;
 
-  --primary: #f4ae7b;
-  --primary-dark: #e18c54;
+   --primary: #ffd43b;
+   --primary-dark: #f4c430;
 
-  --gray-900: #3d2b20;
-  --gray-700: #5b4030;
-  --gray-500: #8a6a55;
-  --gray-300: #d9c3af;
-  --gray-100: #faefe4;
+   --gray-900: #3a2e00;
+   --gray-700: #5a4a12;
+   --gray-500: #8a7955;
+   --gray-300: #e6d8a4;
+   --gray-100: #fff3c8;
 
-  --border: #edd7c4;
+   --border: #f0de95;
 
-  --radius-md: 14px;
-  --radius-lg: 18px;
+   --accent-soft: #ffef9c;
+   --accent-strong: #ffd43b;
 
-  --shadow-soft: 0 10px 25px rgba(111, 78, 55, 0.16);
+   --shadow-soft: 0 10px 25px rgba(255, 212, 59, 0.25);
+   --header-blur: rgba(255, 251, 232, 0.9);
 
-  --header-blur: rgba(255, 248, 236, 0.8);
+   /* 🔹 오늘 요약(요약 카드)용 기본 토큰 - Yellow Light 기준 */
+   --summary-label-color: #8a6a55;
+   --summary-value-color: #3a2e00;
+   --summary-head-sub-color: rgba(61, 43, 32, 0.78);
+   --summary-item-bg: rgba(255, 248, 236, 0.9);
 
-  /* 강조색 (요약 카드 등에서 사용) */
-  --accent-soft: #ffe2bf;
-  --accent-strong: #f4ae7b;
+   /* 🔹 primary 배경 위 텍스트 컬러 (기본은 흰색) */
+   --btn-on-primary: #ffffff;
 }
 
-/* 🐻 곰돌이 · 다크 모드 */
-:root[data-theme="dark"] {
-  --bg: #1b1410;
-  --surface: #251912;
+/* 공통 다크 모드(노랑 기준) */
+:root[data-theme='dark'] {
+   --bg: #181302;
+   --surface: #221b03;
 
-  --primary: #f4ae7b;
-  --primary-dark: #f09a5c;
+   --primary: #ffeb7a;
+   --primary-dark: #ffd43b;
 
-  --gray-900: #fef4e8;
-  --gray-700: #f5e1cd;
-  --gray-500: #d3b9a0;
-  --gray-300: #8b6b55;
-  --gray-100: #3a2720;
+   --gray-900: #fff7d9;
+   --gray-700: #efe2a5;
+   --gray-500: #cabb7a;
+   --gray-300: #7b6a32;
+   --gray-100: #3f3513;
 
-  --border: #3a2720;
+   --border: #4f4319;
 
-  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.65);
+   --accent-soft: #3f3513;
+   --accent-strong: #ffeb7a;
 
-  --header-blur: rgba(27, 20, 16, 0.85);
+   --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.9);
+   --header-blur: rgba(24, 19, 2, 0.94);
 
-  --accent-soft: #3a2720;
-  --accent-strong: #f4ae7b;
+   /* 🔹 오늘 요약 - Yellow Dark 기본값 */
+   --summary-label-color: #f5e8b3;
+   --summary-value-color: #fff7d9;
+   --summary-head-sub-color: #efe2a5;
+   --summary-item-bg: rgba(15, 23, 42, 0.4);
+
+   /* 다크 공통 기본: primary 위 텍스트는 흰색 */
+   --btn-on-primary: #ffffff;
 }
 
-/* 🐶 강아지 테마 - 화이트 + 블랙 + 파스텔 블루 */
-:root[data-animal="dog"] {
-  --bg: #f5f7ff;
-  --surface: #ffffff;
+/* 🍋 Yellow Jelly (노란 젤리) - light */
+:root[data-jelly='yellow'] {
+   --bg: #fffbe8;
+   --surface: #ffffff;
 
-  --primary: #4b79f4;
-  --primary-dark: #365bd6;
+   --primary: #ffd43b;
+   --primary-dark: #f4c430;
 
-  --gray-900: #101827;
-  --gray-700: #1f2937;
-  --gray-500: #6b7280;
-  --gray-300: #d1d5db;
-  --gray-100: #e5e7eb;
+   --gray-900: #3a2e00;
+   --gray-700: #5a4a12;
+   --gray-500: #8a7955;
+   --gray-300: #e6d8a4;
+   --gray-100: #fff3c8;
 
-  --border: #d4d9e6;
+   --border: #f0de95;
 
-  --radius-md: 12px;
-  --radius-lg: 16px;
+   --accent-soft: #ffef9c;
+   --accent-strong: #ffd43b;
 
-  --shadow-soft: 0 10px 25px rgba(15, 23, 42, 0.16);
+   --shadow-soft: 0 10px 25px rgba(255, 212, 59, 0.25);
+   --header-blur: rgba(255, 251, 232, 0.9);
 
-  --header-blur: rgba(245, 247, 255, 0.9);
+   /* 🔹 오늘 요약 - Yellow Light */
+   --summary-label-color: #8a6a55;
+   --summary-value-color: #3a2e00;
+   --summary-head-sub-color: rgba(61, 43, 32, 0.78);
+   --summary-item-bg: rgba(255, 248, 236, 0.9);
 
-  --accent-soft: #dbe4ff;
-  --accent-strong: #4b79f4;
+   /* 🔹 밝은 노랑 버튼 위 텍스트는 진한 갈색 */
+   --btn-on-primary: #3a2e00;
 }
 
-:root[data-theme="dark"][data-animal="dog"] {
-  --bg: #020617;
-  --surface: #020617;
+/* 🍋 Yellow Jelly - dark */
+:root[data-theme='dark'][data-jelly='yellow'] {
+   --bg: #181302;
+   --surface: #221b03;
 
-  --primary: #60a5fa;
-  --primary-dark: #3b82f6;
+   --primary: #ffeb7a;
+   --primary-dark: #ffd43b;
 
-  --gray-900: #e5e7eb;
-  --gray-700: #d1d5db;
-  --gray-500: #9ca3af;
-  --gray-300: #4b5563;
-  --gray-100: #111827;
+   --gray-900: #fff7d9;
+   --gray-700: #efe2a5;
+   --gray-500: #cabb7a;
+   --gray-300: #7b6a32;
+   --gray-100: #3f3513;
 
-  --border: #1e293b;
+   --border: #4f4319;
 
-  --shadow-soft: 0 12px 30px rgba(15, 23, 42, 0.9);
+   --accent-soft: #3f3513;
+   --accent-strong: #ffeb7a;
 
-  --header-blur: rgba(2, 6, 23, 0.92);
+   --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.9);
+   --header-blur: rgba(24, 19, 2, 0.94);
 
-  --accent-soft: #0f172a;
-  --accent-strong: #60a5fa;
+   /* 🔹 오늘 요약 - Yellow Dark */
+   --summary-label-color: #f5e8b3;
+   --summary-value-color: #fff7d9;
+   --summary-head-sub-color: #efe2a5;
+   --summary-item-bg: rgba(15, 23, 42, 0.4);
+
+   /* 🔹 다크 + 노랑에서도 버튼 위 텍스트는 진한 갈색 */
+   --btn-on-primary: #3a2e00;
 }
 
-/* 🐱 삼색고양이 테마 - 핑크 + 오렌지 + 크림 */
-:root[data-animal="cat"] {
-  --bg: #fff4f7; /* 전체 배경: 연핑크 */
-  --surface: #fffdf9; /* 카드: 크림색 */
+/* 🍇 Purple Jelly (보라 젤리) - light */
+:root[data-jelly='purple'] {
+   --bg: #f7f2ff;
+   --surface: #ffffff;
 
-  --primary: #ff9f1c; /* 진한 오렌지 */
-  --primary-dark: #ff6b35; /* 더 진한 오렌지 */
+   --primary: #8b5cf6;
+   --primary-dark: #7c3aed;
 
-  --gray-900: #3b2415; /* 텍스트: 브라운 */
-  --gray-700: #5b3424;
-  --gray-500: #8c5a3c;
-  --gray-300: #f4c9a4;
-  --gray-100: #ffe8cf;
+   --gray-900: #2b1b3f;
+   --gray-700: #463163;
+   --gray-500: #7b66a3;
+   --gray-300: #d5c8ff;
+   --gray-100: #f0e9ff;
 
-  --border: #f7c4c8; /* 살짝 핑크 도는 보더 */
+   --border: #dbcfff;
 
-  --radius-md: 16px;
-  --radius-lg: 22px;
+   --accent-soft: #e7d9ff;
+   --accent-strong: #8b5cf6;
 
-  --shadow-soft: 0 10px 25px rgba(220, 117, 87, 0.25);
+   --shadow-soft: 0 10px 25px rgba(139, 92, 246, 0.28);
+   --header-blur: rgba(247, 242, 255, 0.9);
 
-  --header-blur: rgba(255, 236, 244, 0.9);
+   /* 🔹 오늘 요약 - Purple Light */
+   --summary-label-color: #624a8a;
+   --summary-value-color: #2b1b3f;
+   --summary-head-sub-color: rgba(53, 34, 88, 0.8);
+   --summary-item-bg: rgba(231, 217, 255, 0.92);
 
-  /* 요약 카드 계열 색 */
-  --accent-soft: #ffd8e5; /* 핑크 하이라이트 */
-  --accent-strong: #ff9f1c; /* 오렌지 그라데이션 시작 */
+   /* 보라 버튼 위 텍스트는 흰색 유지 */
+   --btn-on-primary: #ffffff;
 }
 
-:root[data-theme="dark"][data-animal="cat"] {
-  --bg: #160b10; /* 어두운 보라+브라운 */
-  --surface: #210f18;
+/* 🍇 Purple Jelly - dark */
+:root[data-theme='dark'][data-jelly='purple'] {
+   --bg: #11091f;
+   --surface: #1a0f2b;
 
-  --primary: #ffb347;
-  --primary-dark: #ff8b3d;
+   --primary: #c7a7ff;
+   --primary-dark: #a98bff;
 
-  --gray-900: #ffecef;
-  --gray-700: #ffd5dd;
-  --gray-500: #f2b3c0;
-  --gray-300: #b87478;
-  --gray-100: #3b1b24;
+   --gray-900: #f0e9ff;
+   --gray-700: #dcd0ff;
+   --gray-500: #b8a4ff;
+   --gray-300: #7a67b0;
+   --gray-100: #3b2f63;
 
-  --border: #4d2633;
+   --border: #4e3f77;
 
-  --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.9);
+   --accent-soft: #3b2f63;
+   --accent-strong: #c7a7ff;
 
-  --header-blur: rgba(20, 8, 14, 0.95);
+   --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.9);
+   --header-blur: rgba(17, 9, 31, 0.94);
 
-  --accent-soft: #3b1b24; /* 진한 와인색 */
-  --accent-strong: #ffb347; /* 따뜻한 오렌지 */
+   /* 🔹 오늘 요약 - Purple Dark */
+   --summary-label-color: #e3d7ff;
+   --summary-value-color: #f0e9ff;
+   --summary-head-sub-color: #dcd0ff;
+   --summary-item-bg: rgba(26, 15, 43, 0.75);
+
+   --btn-on-primary: #ffffff;
+}
+
+/* 🍑 Pink Jelly (분홍 젤리) - light */
+:root[data-jelly='pink'] {
+   --bg: #fff3f7;
+   --surface: #ffffff;
+
+   --primary: #ff7296;
+   --primary-dark: #ff527c;
+
+   --gray-900: #401920;
+   --gray-700: #6a3943;
+   --gray-500: #a06774;
+   --gray-300: #ffc8d6;
+   --gray-100: #ffe3ec;
+
+   --border: #ffc9d8;
+
+   --accent-soft: #ffd2df;
+   --accent-strong: #ff7296;
+
+   --shadow-soft: 0 10px 25px rgba(255, 114, 150, 0.28);
+   --header-blur: rgba(255, 243, 247, 0.9);
+
+   /* 🔹 오늘 요약 - Pink Light */
+   --summary-label-color: #7c3b4b;
+   --summary-value-color: #401920;
+   --summary-head-sub-color: rgba(92, 33, 48, 0.82);
+   --summary-item-bg: rgba(255, 210, 223, 0.9);
+
+   --btn-on-primary: #ffffff;
+}
+
+/* 🍑 Pink Jelly - dark */
+:root[data-theme='dark'][data-jelly='pink'] {
+   --bg: #1a0c10;
+   --surface: #241218;
+
+   --primary: #ff9fb8;
+   --primary-dark: #ff7899;
+
+   --gray-900: #ffe8ef;
+   --gray-700: #ffd2e0;
+   --gray-500: #f3a9bf;
+   --gray-300: #b56a7f;
+   --gray-100: #442832;
+
+   --border: #5c3a46;
+
+   --accent-soft: #442832;
+   --accent-strong: #ff9fb8;
+
+   --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.9);
+   --header-blur: rgba(26, 12, 16, 0.94);
+
+   /* 🔹 오늘 요약 - Pink Dark */
+   --summary-label-color: #ffd2e0;
+   --summary-value-color: #ffe8ef;
+   --summary-head-sub-color: #f3a9bf;
+   --summary-item-bg: rgba(36, 18, 24, 0.78);
+
+   --btn-on-primary: #ffffff;
 }

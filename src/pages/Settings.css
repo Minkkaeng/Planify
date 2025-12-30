@@ -1,158 +1,187 @@
-/* src/pages/Settings.css */
-
-/* 전체 페이지 */
 .settings-page {
-  max-width: 640px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+   max-width: 640px;
+   margin: 0 auto;
+   display: flex;
+   flex-direction: column;
+   gap: 16px;
 }
 
-/* 공통 카드 */
 .settings-card {
-  padding: 16px;
-  border-radius: 18px;
-  background: var(--surface);
-  box-shadow: var(--shadow-soft);
+   padding: 16px;
+   border-radius: 18px;
+   background: var(--surface);
+   box-shadow: var(--shadow-soft);
 }
 
-.settings-card.settings-danger {
-  border: 1px solid rgba(248, 113, 113, 0.4);
+.settings-card-head {
+   display: flex;
+   justify-content: space-between;
+   align-items: baseline;
+   margin-bottom: 12px;
 }
 
-/* 타이틀 */
-.settings-title {
-  margin: 0 0 8px;
-  font-size: 15px;
+.settings-card-head h2 {
+   margin: 0;
+   font-size: 15px;
 }
 
-/* 도움 텍스트 */
-.settings-help {
-  margin: 0 0 8px;
-  font-size: 12px;
-  color: var(--gray-500);
+.settings-save-msg {
+   font-size: 12px;
+   color: var(--primary);
 }
 
-/* 필드 */
+/* 폼 */
+.settings-form {
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
+}
+
 .settings-field {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-bottom: 8px;
+   display: flex;
+   flex-direction: column;
+   gap: 4px;
 }
 
 .settings-field label {
-  font-size: 12px;
-  color: var(--gray-600);
+   font-size: 12px;
+   color: var(--gray-500);
 }
 
 .settings-field input,
 .settings-field textarea {
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  padding: 8px 10px;
-  font-size: 13px;
-  background: #ffffff;
+   border-radius: 14px;
+   border: 1px solid var(--border);
+   padding: 8px 10px;
+   font-size: 13px;
+   background: #ffffff;
 }
 
-:root[data-theme="dark"] .settings-field input,
-:root[data-theme="dark"] .settings-field textarea {
-  background: #111827;
-  color: var(--gray-100);
+:root[data-theme='dark'] .settings-field input,
+:root[data-theme='dark'] .settings-field textarea {
+   background: #111827;
+   color: var(--gray-900);
 }
 
-/* 프로필 저장 버튼 */
-.settings-save-btn {
-  border-radius: 12px;
-  border: none;
-  padding: 8px 12px;
-  font-size: 13px;
-  font-weight: 600;
-  background: var(--primary);
-  color: #fff;
-  cursor: pointer;
+.settings-field input:focus,
+.settings-field textarea:focus {
+   outline: none;
+   border-color: var(--primary);
+   box-shadow: 0 0 0 1px var(--primary);
 }
 
-/* 화면 모드 버튼 */
-.settings-mode-row {
-  display: flex;
-  gap: 8px;
+.settings-actions {
+   display: flex;
+   justify-content: flex-end;
+   margin-top: 4px;
 }
 
-.settings-mode-btn {
-  flex: 1;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  padding: 8px 12px;
-  font-size: 12px;
-  cursor: pointer;
+.settings-actions button {
+   border: none;
+   border-radius: 14px;
+   padding: 8px 16px;
+   background: var(--primary);
+   color: #fff;
+   font-size: 13px;
+   font-weight: 600;
+   cursor: pointer;
 }
 
-.settings-mode-btn.active {
-  border-color: var(--primary);
-  background: rgba(59, 130, 246, 0.08);
+/* 섹션 */
+.settings-section {
+   margin-top: 12px;
 }
 
-/* 젤리 테마 그리드 */
-.settings-jelly-grid {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+.settings-section h3 {
+   margin: 0 0 6px;
+   font-size: 13px;
 }
 
-.settings-jelly-item {
-  flex: 1 1 0;
-  min-width: 90px;
-  max-width: 120px;
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
+.settings-help {
+   margin: 0 0 6px;
+   font-size: 12px;
+   color: var(--gray-500);
 }
 
-.settings-jelly-item.active {
-  border-color: var(--primary);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.15);
+/* 칩 그룹 */
+.settings-chip-group {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 6px;
 }
 
-.settings-jelly-img {
-  width: 56px; /* 512px 원본 → 적당히 줄여서 사용 */
-  height: 56px;
-  border-radius: 18px;
-  object-fit: cover;
+.settings-chip-group button {
+   border-radius: 999px;
+   border: 1px solid var(--border);
+   background: var(--surface);
+   padding: 6px 10px;
+   font-size: 12px;
+   cursor: pointer;
+   transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+
+   display: inline-flex;
+   align-items: center;
+   gap: 6px;
 }
 
-.settings-jelly-label {
-  font-size: 11px;
+.settings-chip-group button.active {
+   background: var(--primary);
+   color: #fff;
+   border-color: var(--primary-dark);
+   transform: translateY(-1px);
 }
 
-/* 데이터 초기화 버튼 */
+/* 다크 모드에서 칩 텍스트/배경 대비 강화 */
+:root[data-theme='dark'] .settings-chip-group button {
+   background: #111827;
+   color: var(--gray-900);
+   border-color: var(--border);
+}
+
+:root[data-theme='dark'] .settings-chip-group button.active {
+   background: var(--primary);
+   color: #fff;
+   border-color: var(--primary-dark);
+}
+
+/* 🔹 젤리 PNG 아이콘 */
+.settings-jelly-icon {
+   width: 18px;
+   height: 18px;
+   border-radius: 999px;
+   display: block;
+}
+
+/* 초기화 */
+.settings-reset {
+   margin-top: 16px;
+   border-top: 1px dashed var(--border);
+   padding-top: 10px;
+}
+
 .settings-reset-btn {
-  border-radius: 12px;
-  border: none;
-  padding: 8px 12px;
-  font-size: 13px;
-  font-weight: 600;
-  background: #ef4444;
-  color: #fff;
-  cursor: pointer;
+   border-radius: 14px;
+   border: 1px solid #f97373;
+   background: #fee2e2;
+   color: #b91c1c;
+   padding: 8px 12px;
+   font-size: 12px;
+   cursor: pointer;
+}
+
+:root[data-theme='dark'] .settings-reset-btn {
+   background: #7f1d1d;
+   color: #fee2e2;
+   border-color: #fca5a5;
 }
 
 /* 반응형 */
 @media (max-width: 640px) {
-  .settings-card {
-    padding: 14px;
-  }
+   .settings-page {
+      gap: 12px;
+   }
 
-  .settings-jelly-img {
-    width: 52px;
-    height: 52px;
-  }
+   .settings-card {
+      padding: 14px;
+   }
 }

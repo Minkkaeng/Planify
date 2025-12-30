@@ -1,73 +1,95 @@
 // src/utils/taskStorage.js
 
-const TASK_KEY = "planify_tasks_v1";
+export const TASK_KEY = 'planify_tasks_v1';
 
-// 내부에서 사용하는 정규화 함수
-function normalizeTask(t) {
-  return {
-    id: t.id ?? Date.now(),
-    title: t.title ?? "",
-    done: !!t.done,
-    project: t.project ?? "personal", // personal | study | work | etc
-    priority: t.priority ?? "normal", // high | normal | low
-    dueDate: t.dueDate ?? "",
-    createdAt: t.createdAt ?? Date.now(),
-  };
+// ID 생성 (브라우저 crypto 우선, 없으면 fallback)
+function generateTaskId() {
+   if (typeof window !== 'undefined' && window.crypto && typeof window.crypto.randomUUID === 'function') {
+      return window.crypto.randomUUID();
+   }
+   return `task-${Date.now()}-${Math.random().toString(16).slice(2)}`;
 }
 
-// ✅ 전체 할 일 목록 읽기
 export function loadTasks() {
-  try {
-    const raw = localStorage.getItem(TASK_KEY);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
+   try {
+      const raw = localStorage.getItem(TASK_KEY);
+      if (!raw) return [];
 
-    if (!Array.isArray(parsed)) return [];
-
-    return parsed.map(normalizeTask);
-  } catch (e) {
-    console.error("taskStorage loadTasks error:", e);
-    return [];
-  }
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) {
+         localStorage.removeItem(TASK_KEY);
+         return [];
+      }
+      return parsed;
+   } catch {
+      localStorage.removeItem(TASK_KEY);
+      return [];
+   }
 }
 
-// ✅ 전체 저장
 export function saveTasks(tasks) {
-  try {
-    localStorage.setItem(TASK_KEY, JSON.stringify(tasks));
-    return true;
-  } catch (e) {
-    console.error("taskStorage saveTasks error:", e);
-    return false;
-  }
+   localStorage.setItem(TASK_KEY, JSON.stringify(tasks));
 }
 
-// ✅ 새 할 일 추가 (내부 공용)
-export function addTask(task) {
-  const list = loadTasks();
-  const newTask = normalizeTask(task);
-  const newList = [...list, newTask];
-  saveTasks(newList);
-  return newTask;
+// 기본 생성 (Tasks 페이지에서 사용)
+export function createTask(data) {
+   const tasks = loadTasks();
+   const now = Date.now();
+
+   const newTask = {
+      id: generateTaskId(),
+      title: data.title || '',
+      project: data.project || 'personal', // personal | study | work | etc
+      priority: data.priority || 'medium', // low | medium | high
+      dueDate: data.dueDate || '',
+      memo: data.memo || '',
+      done: false,
+      createdAt: now,
+   };
+
+   const next = [newTask, ...tasks];
+   saveTasks(next);
+   return next;
 }
 
-// ✅ Tasks.jsx 에서 쓰는 이름 맞춰주기: createTask → addTask 래핑
-export function createTask(task) {
-  return addTask(task);
+// 캘린더에서 특정 날짜에 바로 생성
+export function createTaskForDate(date, data) {
+   const tasks = loadTasks();
+   const now = Date.now();
+
+   const newTask = {
+      id: generateTaskId(),
+      title: data.title || '',
+      project: data.project || 'personal',
+      priority: data.priority || 'medium',
+      dueDate: date, // 선택된 날짜
+      memo: data.memo || '',
+      done: false,
+      createdAt: now,
+   };
+
+   const next = [newTask, ...tasks];
+   saveTasks(next);
+   return next;
 }
 
-// ✅ 할 일 수정
 export function updateTask(id, patch) {
-  const list = loadTasks();
-  const newList = list.map((t) => (t.id === id ? { ...t, ...patch } : t));
-  saveTasks(newList);
-  return newList;
+   const tasks = loadTasks();
+   const next = tasks.map((t) =>
+      t.id === id
+         ? {
+              ...t,
+              ...patch,
+           }
+         : t
+   );
+   saveTasks(next);
+   return next;
 }
 
-// ✅ 할 일 삭제
 export function deleteTask(id) {
-  const list = loadTasks();
-  const newList = list.filter((t) => t.id !== id);
-  saveTasks(newList);
-  return newList;
+   const tasks = loadTasks();
+   const next = tasks.filter((t) => t.id !== id);
+   saveTasks(next);
+   return next;
 }
