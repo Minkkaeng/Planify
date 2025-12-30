@@ -1,17 +1,24 @@
 // src/components/Layout.jsx
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, Outlet } from 'react-router-dom';
 import './Layout.css';
 import { useTheme } from '../context/ThemeContext';
 import { getJellyLogo, getJellyLabel } from '../utils/jellyAssets';
 
-function Layout({ title, children }) {
+const TITLE_BY_PATH = {
+   '/': 'Planify',
+   '/tasks': '플랜 관리',
+   '/calendar': '캘린더',
+   '/settings': '설정',
+};
+
+function Layout() {
    const { pathname } = useLocation();
    const navigate = useNavigate();
-   // 🔹 setColorMode 추가해서 헤더에서 토글 가능하게
    const { colorMode, jelly, setColorMode } = useTheme();
 
    const logoImg = getJellyLogo(jelly);
    const jellyLabel = getJellyLabel(jelly);
+   const pageTitle = TITLE_BY_PATH[pathname] || 'Planify';
 
    const goHome = () => {
       navigate('/');
@@ -26,20 +33,18 @@ function Layout({ title, children }) {
          <header className="layout-header">
             <div className="layout-header-inner">
                <div className="layout-header-left">
-                  {/* 로고 영역: PNG 로고 버튼 → 홈 이동 */}
                   <div className="layout-logo">
                      <button type="button" className="logo-button" onClick={goHome} aria-label="홈으로 이동">
                         <img src={logoImg} alt={`${jellyLabel} 로고`} className="logo-img" />
                      </button>
 
                      <div className="logo-text">
-                        <span className="logo-title">{title}</span>
+                        <span className="logo-title">{pageTitle}</span>
                      </div>
                   </div>
                </div>
 
                <div className="layout-header-right">
-                  {/* 🔹 헤더에서 바로 다크/라이트 모드 토글 */}
                   <button type="button" className="layout-theme-chip" onClick={toggleTheme}>
                      {colorMode === 'light' ? '☾ 다크 모드' : '☀ 라이트 모드'}
                   </button>
@@ -51,7 +56,9 @@ function Layout({ title, children }) {
             </div>
          </header>
 
-         <main className="layout-body">{children}</main>
+         <main className="layout-body">
+            <Outlet />
+         </main>
 
          <nav className="layout-tab">
             <Link to="/" className={pathname === '/' ? 'layout-tab-link active' : 'layout-tab-link'}>

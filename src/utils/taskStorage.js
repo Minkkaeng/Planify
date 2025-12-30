@@ -1,15 +1,17 @@
+// src/utils/taskStorage.js
 /*
   @typedef {"personal" | "study" | "work" | "etc"} ProjectType
-  @typedef {"high" | "normal" | "low"} PriorityType
+  @typedef {"high" | "medium" | "low"} PriorityType
   @typedef {Object} Task
-  @property {number} id
+  @property {string} id
   @property {string} title
   @property {boolean} done
   @property {ProjectType} project
   @property {PriorityType} priority
-  @property {string} dueDate
+  @property {string} [dueDate]
+  @property {string} [memo]
   @property {number} createdAt
- */
+*/
 
 export const TASK_KEY = 'planify_tasks_v1';
 
@@ -42,7 +44,7 @@ export function saveTasks(tasks) {
    localStorage.setItem(TASK_KEY, JSON.stringify(tasks));
 }
 
-// 기본 생성 (Tasks 페이지에서 사용)
+// 기본 생성 (Tasks 페이지)
 export function createTask(data) {
    const tasks = loadTasks();
    const now = Date.now();
@@ -50,8 +52,8 @@ export function createTask(data) {
    const newTask = {
       id: generateTaskId(),
       title: data.title || '',
-      project: data.project || 'personal', // personal | study | work | etc
-      priority: data.priority || 'medium', // low | medium | high
+      project: data.project || 'personal',
+      priority: data.priority || 'medium',
       dueDate: data.dueDate || '',
       memo: data.memo || '',
       done: false,
@@ -73,7 +75,7 @@ export function createTaskForDate(date, data) {
       title: data.title || '',
       project: data.project || 'personal',
       priority: data.priority || 'medium',
-      dueDate: date, // 선택된 날짜
+      dueDate: date,
       memo: data.memo || '',
       done: false,
       createdAt: now,

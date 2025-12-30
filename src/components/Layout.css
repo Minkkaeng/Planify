@@ -1,3 +1,4 @@
+/* src/components/Layout.css */
 /* 전체 레이아웃 */
 .layout {
    min-height: 100vh;
@@ -101,7 +102,7 @@
    transform: translateY(-1px);
 }
 
-/* 다크 모드에서 테마 칩 텍스트/배경 대비 */
+/* 다크 모드에서 테마 칩 */
 :root[data-theme='dark'] .layout-theme-chip {
    background: #111827;
    color: var(--gray-900);

@@ -1,6 +1,5 @@
 // src/pages/Tasks.jsx
 import { useState } from 'react';
-import Layout from '../components/Layout';
 import { loadTasks, createTask, updateTask, deleteTask } from '../utils/taskStorage';
 import './Tasks.css';
 
@@ -26,18 +25,14 @@ const EMPTY_FORM = {
 };
 
 function Tasks() {
-   // ✅ 초기 로딩을 useState lazy init으로
    const [tasks, setTasks] = useState(() => loadTasks());
    const [form, setForm] = useState(EMPTY_FORM);
 
-   // 상단 카테고리: all | active | done
    const [filter, setFilter] = useState('all');
 
-   // 수정 모달 상태
    const [editingTask, setEditingTask] = useState(null);
    const [editForm, setEditForm] = useState(EMPTY_FORM);
 
-   // 삭제 확인 모달 상태
    const [deleteTargetId, setDeleteTargetId] = useState(null);
 
    const handleChange = (field, value) => {
@@ -60,7 +55,6 @@ function Tasks() {
       setTasks(next);
    };
 
-   // 수정 모달 열기
    const openEditModal = (task) => {
       setEditingTask(task);
       setEditForm({
@@ -96,7 +90,6 @@ function Tasks() {
       closeEditModal();
    };
 
-   // 삭제 모달 열기
    const openDeleteConfirm = (id) => {
       setDeleteTargetId(id);
    };
@@ -112,13 +105,13 @@ function Tasks() {
       setDeleteTargetId(null);
    };
 
-   // 정렬: 최신 id 기준
-   const sorted = [...tasks].sort((a, b) => b.id - a.id);
+   // createdAt 기준 최신 정렬 (id는 UUID라 숫자 연산 X)
+   const sorted = [...tasks].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
    const activeTasks = sorted.filter((t) => !t.done);
    const doneTasks = sorted.filter((t) => t.done);
 
    return (
-      <Layout title="플랜 관리">
+      <>
          <div className="tasks-page">
             {/* 새 할 일 추가 */}
             <section className="tasks-card">
@@ -173,7 +166,6 @@ function Tasks() {
                   <h2>전체 할 일</h2>
                </header>
 
-               {/* 카테고리 탭 */}
                <div className="tasks-filter-tabs">
                   <button type="button" className={filter === 'all' ? 'active' : ''} onClick={() => setFilter('all')}>
                      전체
@@ -186,7 +178,6 @@ function Tasks() {
                   </button>
                </div>
 
-               {/* 리스트 */}
                {sorted.length === 0 ? (
                   <p className="tasks-empty">아직 등록된 할 일이 없습니다. 위 폼에서 첫 번째 할 일을 추가해보세요.</p>
                ) : (
@@ -345,7 +336,7 @@ function Tasks() {
             </section>
          </div>
 
-         {/* ✅ 수정 모달 */}
+         {/* 수정 모달 */}
          {editingTask && (
             <div className="tasks-modal-backdrop" onClick={closeEditModal}>
                <div className="tasks-modal" onClick={(e) => e.stopPropagation()}>
@@ -404,7 +395,7 @@ function Tasks() {
             </div>
          )}
 
-         {/* ✅ 삭제 확인 모달 */}
+         {/* 삭제 확인 모달 */}
          {deleteTargetId && (
             <div className="tasks-modal-backdrop" onClick={closeDeleteConfirm}>
                <div className="tasks-modal" onClick={(e) => e.stopPropagation()}>
@@ -426,7 +417,7 @@ function Tasks() {
                </div>
             </div>
          )}
-      </Layout>
+      </>
    );
 }
 

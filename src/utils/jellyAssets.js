@@ -1,5 +1,4 @@
 // src/utils/jellyAssets.js
-
 import yellowLogo from '../assets/gummy-bear-yellow.png';
 import purpleLogo from '../assets/gummy-bear-purple.png';
 import pinkLogo from '../assets/gummy-bear-pink.png';

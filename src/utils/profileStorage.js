@@ -1,5 +1,4 @@
 // src/utils/profileStorage.js
-
 export const PROFILE_KEY = 'planify_profile';
 
 const EMPTY_PROFILE = {
@@ -21,7 +20,6 @@ export function loadProfile() {
          bio: parsed.bio || '',
       };
    } catch {
-      // JSON 깨져 있으면 제거하고 초기화
       localStorage.removeItem(PROFILE_KEY);
       return { ...EMPTY_PROFILE };
    }

@@ -1,3 +1,4 @@
+/* src/styles/tokens.css */
 /* 기본: light + yellow jelly (기본 테마) */
 :root {
    --bg: #fffbe8;
@@ -20,13 +21,13 @@
    --shadow-soft: 0 10px 25px rgba(255, 212, 59, 0.25);
    --header-blur: rgba(255, 251, 232, 0.9);
 
-   /* 🔹 오늘 요약(요약 카드)용 기본 토큰 - Yellow Light 기준 */
+   /* 오늘 요약 카드용 */
    --summary-label-color: #8a6a55;
    --summary-value-color: #3a2e00;
    --summary-head-sub-color: rgba(61, 43, 32, 0.78);
    --summary-item-bg: rgba(255, 248, 236, 0.9);
 
-   /* 🔹 primary 배경 위 텍스트 컬러 (기본은 흰색) */
+   /* primary 위 텍스트 컬러 */
    --btn-on-primary: #ffffff;
 }
 
@@ -52,17 +53,15 @@
    --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.9);
    --header-blur: rgba(24, 19, 2, 0.94);
 
-   /* 🔹 오늘 요약 - Yellow Dark 기본값 */
    --summary-label-color: #f5e8b3;
    --summary-value-color: #fff7d9;
    --summary-head-sub-color: #efe2a5;
    --summary-item-bg: rgba(15, 23, 42, 0.4);
 
-   /* 다크 공통 기본: primary 위 텍스트는 흰색 */
    --btn-on-primary: #ffffff;
 }
 
-/* 🍋 Yellow Jelly (노란 젤리) - light */
+/* 🍋 Yellow Jelly - light */
 :root[data-jelly='yellow'] {
    --bg: #fffbe8;
    --surface: #ffffff;
@@ -84,13 +83,11 @@
    --shadow-soft: 0 10px 25px rgba(255, 212, 59, 0.25);
    --header-blur: rgba(255, 251, 232, 0.9);
 
-   /* 🔹 오늘 요약 - Yellow Light */
    --summary-label-color: #8a6a55;
    --summary-value-color: #3a2e00;
    --summary-head-sub-color: rgba(61, 43, 32, 0.78);
    --summary-item-bg: rgba(255, 248, 236, 0.9);
 
-   /* 🔹 밝은 노랑 버튼 위 텍스트는 진한 갈색 */
    --btn-on-primary: #3a2e00;
 }
 
@@ -116,17 +113,15 @@
    --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.9);
    --header-blur: rgba(24, 19, 2, 0.94);
 
-   /* 🔹 오늘 요약 - Yellow Dark */
    --summary-label-color: #f5e8b3;
    --summary-value-color: #fff7d9;
    --summary-head-sub-color: #efe2a5;
    --summary-item-bg: rgba(15, 23, 42, 0.4);
 
-   /* 🔹 다크 + 노랑에서도 버튼 위 텍스트는 진한 갈색 */
    --btn-on-primary: #3a2e00;
 }
 
-/* 🍇 Purple Jelly (보라 젤리) - light */
+/* 🍇 Purple Jelly - light */
 :root[data-jelly='purple'] {
    --bg: #f7f2ff;
    --surface: #ffffff;
@@ -148,13 +143,11 @@
    --shadow-soft: 0 10px 25px rgba(139, 92, 246, 0.28);
    --header-blur: rgba(247, 242, 255, 0.9);
 
-   /* 🔹 오늘 요약 - Purple Light */
    --summary-label-color: #624a8a;
    --summary-value-color: #2b1b3f;
    --summary-head-sub-color: rgba(53, 34, 88, 0.8);
    --summary-item-bg: rgba(231, 217, 255, 0.92);
 
-   /* 보라 버튼 위 텍스트는 흰색 유지 */
    --btn-on-primary: #ffffff;
 }
 
@@ -180,7 +173,6 @@
    --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.9);
    --header-blur: rgba(17, 9, 31, 0.94);
 
-   /* 🔹 오늘 요약 - Purple Dark */
    --summary-label-color: #e3d7ff;
    --summary-value-color: #f0e9ff;
    --summary-head-sub-color: #dcd0ff;
@@ -189,7 +181,7 @@
    --btn-on-primary: #ffffff;
 }
 
-/* 🍑 Pink Jelly (분홍 젤리) - light */
+/* 🍑 Pink Jelly - light */
 :root[data-jelly='pink'] {
    --bg: #fff3f7;
    --surface: #ffffff;
@@ -211,7 +203,6 @@
    --shadow-soft: 0 10px 25px rgba(255, 114, 150, 0.28);
    --header-blur: rgba(255, 243, 247, 0.9);
 
-   /* 🔹 오늘 요약 - Pink Light */
    --summary-label-color: #7c3b4b;
    --summary-value-color: #401920;
    --summary-head-sub-color: rgba(92, 33, 48, 0.82);
@@ -242,7 +233,6 @@
    --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.9);
    --header-blur: rgba(26, 12, 16, 0.94);
 
-   /* 🔹 오늘 요약 - Pink Dark */
    --summary-label-color: #ffd2e0;
    --summary-value-color: #ffe8ef;
    --summary-head-sub-color: #f3a9bf;

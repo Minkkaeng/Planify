@@ -2,7 +2,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
-import Layout from '../components/Layout';
 import { loadTasks, createTaskForDate } from '../utils/taskStorage';
 import './Calendar.css';
 
@@ -141,7 +140,7 @@ function Calendar() {
    };
 
    return (
-      <Layout title="캘린더">
+      <>
          <div className="calendar-page">
             <section className="calendar-card">
                <header className="calendar-head">
@@ -287,7 +286,7 @@ function Calendar() {
                </div>
             </div>
          )}
-      </Layout>
+      </>
    );
 }
 

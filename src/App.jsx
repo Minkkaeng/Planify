@@ -9,14 +9,15 @@ import Settings from './pages/Settings';
 
 function App() {
    return (
-      <Layout>
-         <Routes>
+      <Routes>
+         {/* 레이아웃은 여기에서만 한 번 씀 */}
+         <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/tasks" element={<Tasks />} />
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/settings" element={<Settings />} />
-         </Routes>
-      </Layout>
+         </Route>
+      </Routes>
    );
 }
 
