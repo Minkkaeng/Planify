@@ -1,4 +1,15 @@
-// src/utils/taskStorage.js
+/*
+  @typedef {"personal" | "study" | "work" | "etc"} ProjectType
+  @typedef {"high" | "normal" | "low"} PriorityType
+  @typedef {Object} Task
+  @property {number} id
+  @property {string} title
+  @property {boolean} done
+  @property {ProjectType} project
+  @property {PriorityType} priority
+  @property {string} dueDate
+  @property {number} createdAt
+ */
 
 export const TASK_KEY = 'planify_tasks_v1';
 
