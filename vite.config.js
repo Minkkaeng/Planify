@@ -4,8 +4,8 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
    plugins: [react()],
-   base: '/Planify/', // 깃허브 레포 이름이랑 맞춰야 함
+   base: '/Planify/',
    build: {
-      outDir: 'docs', // dist 대신 docs로 빌드 → GitHub Pages(main/docs)랑 맞춤
+      outDir: 'docs',
    },
 });
